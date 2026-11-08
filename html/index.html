@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolTun City - Character Select</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body data-view="card">
+
+    <!-- TRÁI: logo + tiêu đề + danh sách slot -->
+    <div class="left-panel">
+        <div class="header-box">
+            <img class="server-logo" src="./512.png" alt="ToolTun City Roleplay">
+            <div class="badge-tag"><span>TOOLTUN CITY ROLEPLAY</span></div>
+            <h1 class="main-title">CHOOSE YOUR<br>CHARACTER</h1>
+            <div class="slot-count-badge" id="slot-count">0 OF 0 SLOTS USED</div>
+        </div>
+        <div class="slot-list" id="slot-list"></div>
+    </div>
+
+    <!-- PHẢI: Citizen ID / Đăng ký -->
+    <div class="right-panel is-card" id="right-panel">
+
+        <!-- ===== CITIZEN ID ===== -->
+        <div id="view-id-card" class="id-card-view hidden">
+            <div class="panel-header">
+                <div class="panel-header-text">
+                    <span>STATE OF SAN ANDREAS</span>
+                    <h2>CITIZEN ID</h2>
+                </div>
+                <div class="panel-badge-num" id="id-slot-num">01</div>
+            </div>
+
+            <div class="panel-body">
+                <div class="id-top">
+                    <div class="avatar-box" id="id-avatar">??</div>
+                    <div class="id-details">
+                        <h3 id="id-name">-</h3>
+                        <div class="id-grid">
+                            <div class="id-field"><label>Date of birth</label><span id="id-birthdate">-</span></div>
+                            <div class="id-field"><label>Gender</label><span id="id-gender">-</span></div>
+                            <div class="id-field"><label>Height (cm)</label><span id="id-height">-</span></div>
+                            <div class="id-field"><label>Nationality</label><span id="id-nationality">-</span></div>
+                            <div class="id-field id-wide"><label>Citizen ID</label><span id="id-citizenid">-</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job-bar">
+                    <label>Job</label>
+                    <span id="id-job">CIVILIAN</span>
+                </div>
+
+                <div class="money-row">
+                    <div class="money-box">
+                        <label>Cash</label>
+                        <span class="money-val" id="id-cash">$0</span>
+                    </div>
+                    <div class="money-box">
+                        <label>Bank</label>
+                        <span class="money-val green" id="id-bank">$0</span>
+                    </div>
+                </div>
+
+                <div class="id-backstory" id="id-backstory-row"><p id="id-backstory"></p></div>
+
+                <div class="last-played" id="id-lastplayed-row">
+                    <label>Last played</label>
+                    <span id="id-lastplayed">-</span>
+                </div>
+
+                <div class="barcode" id="id-barcode"></div>
+
+                <div class="btn-actions">
+                    <button class="btn-sec" id="btn-delete">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"/></svg>
+                        DELETE
+                    </button>
+                    <button class="btn-main" id="btn-play">
+                        PLAY
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ĐĂNG KÝ ===== -->
+        <div id="view-register" class="register-form-view">
+            <div class="panel-header reg">
+                <div class="panel-header-text">
+                    <span>REGISTRATION</span>
+                    <h2>NEW CITIZEN</h2>
+                </div>
+                <div class="panel-badge-num" id="reg-slot-num">02</div>
+            </div>
+
+            <div class="panel-body">
+                <div class="form-error" id="form-error"></div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-firstname">First name</label>
+                        <input id="reg-firstname" class="form-control" maxlength="50" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-lastname">Last name</label>
+                        <input id="reg-lastname" class="form-control" maxlength="50" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-birthdate">Date of birth</label>
+                        <input id="reg-birthdate" class="form-control" inputmode="numeric" autocomplete="off" placeholder="DD-MM-YYYY">
+                        <div class="field-hint" id="reg-date-hint">Format DD-MM-YYYY</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-height">Height (cm)</label>
+                        <input id="reg-height" class="form-control" inputmode="numeric" maxlength="3" autocomplete="off">
+                        <div class="field-hint" id="reg-height-hint">Between 140 and 210</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="gender-selector">
+                        <div class="btn-gender active" data-gender="0">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+                            MALE
+                        </div>
+                        <div class="btn-gender" data-gender="1">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+                            FEMALE
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Nationality</label>
+                    <div id="reg-nationality-wrap"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-backstory">Backstory</label>
+                    <div class="textarea-wrap">
+                        <textarea id="reg-backstory" class="form-control" maxlength="300"></textarea>
+                        <div class="char-count" id="reg-count">0 / 300</div>
+                    </div>
+                    <div class="field-hint">10 to 300 characters</div>
+                </div>
+
+                <div class="btn-actions">
+                    <button class="btn-sec" id="btn-back">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+                        BACK
+                    </button>
+                    <button class="btn-main" id="btn-create">
+                        CREATE CHARACTER
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHÍM TẮT (đổi theo màn hình) -->
+    <div class="bottom-controls">
+        <div class="hint-group" id="hints-card">
+            <div class="key-badge"><span>UP / DOWN</span> SWITCH CHARACTER</div>
+            <div class="key-badge"><span>ENTER</span> PLAY</div>
+        </div>
+        <div class="hint-group" id="hints-reg">
+            <div class="key-badge"><span>ESC</span> BACK</div>
+            <div class="key-badge"><span>TAB</span> NEXT FIELD</div>
+        </div>
+    </div>
+
+    <!-- XÁC NHẬN XOÁ -->
+    <div class="confirm-modal" id="confirm-modal">
+        <div class="confirm-box">
+            <h3>DELETE CHARACTER?</h3>
+            <p>This action cannot be undone.</p>
+            <div class="btn-actions">
+                <button class="btn-sec" id="btn-cancel-delete">CANCEL</button>
+                <button class="btn-main" id="btn-confirm-delete">DELETE</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
